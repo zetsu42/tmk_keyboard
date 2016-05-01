@@ -28,8 +28,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define DESCRIPTION     t.m.k. keyboard firmware for type5
 
 /* key matrix size */
-#define MATRIX_ROWS 6
-#define MATRIX_COLS 22
+#define MATRIX_ROWS 9
+#define MATRIX_COLS 20
 
 /* define if matrix has ghost */
 #define MATRIX_HAS_GHOST
