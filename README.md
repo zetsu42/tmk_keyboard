@@ -1,3 +1,5 @@
+Mod of TMK for sun type 5 keyboard
+
 TMK Keyboard Firmware Collection
 ================================
 This is a keyboard firmware with some useful features for Atmel AVR controller.
