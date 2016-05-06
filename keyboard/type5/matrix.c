@@ -136,17 +136,17 @@ uint8_t matrix_key_count(void)
 
 /* Column pin configuration
  * col: 0   1   2   3   4   5   6   7   8   9   10  11  12  13  14  15  16  17  18  19
- * pin: B5  B4  B3  B2  E7  F0  F1  F2  F3  F4  F5  F6  F7  C7  C5  C4  C2  C0  E1  E0
+ * pin: B5  B4  B3  B2  E7  F0  F1  F2  F3  F4  F5  F6  F7  C7  C5  C4  C2  C1  C0  E1
  */
 static void  init_cols(void)
 {
     // Input with pull-up(DDR:0, PORT:1)
     DDRF  &= ~(1<<0 | 1<<1 | 1<<2 | 1<<3 |1<<4 | 1<<5 | 1<<6 | 1<<7 );
     PORTF |=  (1<<0 | 1<<1 | 1<<2 | 1<<3 |1<<4 | 1<<5 | 1<<6 | 1<<7 );
-    DDRE  &= ~(1<<0 | 1<<1 | 1<<7);
-    PORTE |=  (1<<0 | 1<<1 | 1<<7);
-    DDRC  &= ~(1<<0 | 1<<2 | 1<<4 | 1<<5 | 1<<7);
-    PORTC |=  (1<<0 | 1<<2 | 1<<4 | 1<<5 | 1<<7);
+    DDRE  &= ~(1<<1 | 1<<7);
+    PORTE |=  (1<<1 | 1<<7);
+    DDRC  &= ~(1<<0 | 1<<1 | 1<<2 | 1<<4 | 1<<5 | 1<<7);
+    PORTC |=  (1<<0 | 1<<1 | 1<<2 | 1<<4 | 1<<5 | 1<<7);
     DDRB  &= ~(1<<2 | 1<<3 | 1<<4 | 1<<5);
     PORTB |=  (1<<2 | 1<<3 | 1<<4 | 1<<5);
 }
@@ -170,22 +170,24 @@ static matrix_row_t read_cols(void)
            (PINC&(1<<5) ? 0 : (1<<14)) |
            (PINC&(1<<4) ? 0 : (1<<15)) |
            (PINC&(1<<2) ? 0 : (1<<16)) |
-           (PINC&(1<<0) ? 0 : (1<<17)) |
-           (PINE&(1<<0) ? 0 : (1<<18)) |
+           (PINC&(1<<1) ? 0 : (1<<17)) |
+           (PINC&(1<<0) ? 0 : (1<<18)) |
            (PINE&(1<<1) ? 0 : (1<<19));
 }
 
 /* Row pin configuration
  * row: 0   1   2   3   4   5   6   7   8
- * pin: D7  D6  D5  D4  D3  D2  D1  D0  B7
+ * pin: E0  D7  D5  D4  D3  D2  D1  D0  B7
  */
 static void unselect_rows(void)
 {
     // Hi-Z(DDR:0, PORT:0) to unselect
-    DDRD  &= ~0b11111111;
-    PORTD &= ~0b11111111;
+    DDRD  &= ~0b10111111;
+    PORTD &= ~0b10111111;
     DDRB  &= ~0b10000000;
     PORTB &= ~0b10000000;
+    DDRE  &= ~0b00000001;
+    PORTE &= ~0b00000001;
 }
 
 static void select_row(uint8_t row)
@@ -193,12 +195,12 @@ static void select_row(uint8_t row)
     // Output low(DDR:1, PORT:0) to select
     switch (row) {
         case 0:
-            DDRD  |= (1<<7);
-            PORTD &= ~(1<<7);
+            DDRE  |= (1<<0);
+            PORTE &= ~(1<<0);
             break;
         case 1:
-            DDRD  |= (1<<6);
-            PORTD &= ~(1<<6);
+            DDRD  |= (1<<7);
+            PORTD &= ~(1<<7);
             break;
         case 2:
             DDRD  |= (1<<5);
