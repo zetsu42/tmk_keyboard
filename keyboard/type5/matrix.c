@@ -194,19 +194,19 @@ static void select_row(uint8_t row)
 {
     // Output low(DDR:1, PORT:0) to select
     switch (row) {
-        case 0:
+        case 8:
             DDRE  |= (1<<0);
             PORTE &= ~(1<<0);
             break;
-        case 1:
+        case 7:
             DDRD  |= (1<<7);
             PORTD &= ~(1<<7);
             break;
-        case 2:
+        case 6:
             DDRD  |= (1<<5);
             PORTD &= ~(1<<5);
             break;
-        case 3:
+        case 5:
             DDRD  |= (1<<4);
             PORTD &= ~(1<<4);
             break;
@@ -214,19 +214,19 @@ static void select_row(uint8_t row)
             DDRD  |= (1<<3);
             PORTD &= ~(1<<3);
             break;
-        case 5:
+        case 3:
             DDRD  |= (1<<2);
             PORTD &= ~(1<<2);
             break;
-        case 6:
+        case 2:
             DDRD  |= (1<<1);
             PORTD &= ~(1<<1);
             break;
-        case 7:
+        case 1:
             DDRD  |= (1<<0);
             PORTD &= ~(1<<0);
             break;
-        case 8:
+        case 0:
             DDRB  |= (1<<7);
             PORTB &= ~(1<<7);
             break;
