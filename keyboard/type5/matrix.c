@@ -153,26 +153,26 @@ static void  init_cols(void)
 
 static matrix_row_t read_cols(void)
 {
-    return (PINB&(1<<5) ? 0 : (1<<0)) |
-           (PINB&(1<<4) ? 0 : (1<<1)) |
-           (PINB&(1<<3) ? 0 : (1<<2)) |
-           (PINB&(1<<2) ? 0 : (1<<3)) |
-           (PINE&(1<<7) ? 0 : (1<<4)) |
-           (PINF&(1<<0) ? 0 : (1<<5)) |
-           (PINF&(1<<1) ? 0 : (1<<6)) |
-           (PINF&(1<<2) ? 0 : (1<<7)) |
-           (PINF&(1<<3) ? 0 : (1<<8)) |
-           (PINF&(1<<4) ? 0 : (1<<9)) |
-           (PINF&(1<<5) ? 0 : (1<<10)) |
-           (PINF&(1<<6) ? 0 : (1<<11)) |
-           (PINF&(1<<7) ? 0 : (1<<12)) |
-           (PINC&(1<<7) ? 0 : (1<<13)) |
-           (PINC&(1<<5) ? 0 : (1<<14)) |
-           (PINC&(1<<4) ? 0 : (1<<15)) |
-           (PINC&(1<<2) ? 0 : (1<<16)) |
-           (PINC&(1<<1) ? 0 : (1<<17)) |
-           (PINC&(1<<0) ? 0 : (1<<18)) |
-           (PINE&(1<<1) ? 0 : (1<<19));
+    return (PINB&(1<<5) ? 0 : (1<<19)) |
+           (PINB&(1<<4) ? 0 : (1<<18)) |
+           (PINB&(1<<3) ? 0 : (1<<17)) |
+           (PINB&(1<<2) ? 0 : (1<<16)) |
+           (PINE&(1<<7) ? 0 : (1<<15)) |
+           (PINF&(1<<0) ? 0 : (1<<14)) |
+           (PINF&(1<<1) ? 0 : (1<<13)) |
+           (PINF&(1<<2) ? 0 : (1<<12)) |
+           (PINF&(1<<3) ? 0 : (1<<11)) |
+           (PINF&(1<<4) ? 0 : (1<<10)) |
+           (PINF&(1<<5) ? 0 : (1<<9)) |
+           (PINF&(1<<6) ? 0 : (1<<8)) |
+           (PINF&(1<<7) ? 0 : (1<<7)) |
+           (PINC&(1<<7) ? 0 : (1<<6)) |
+           (PINC&(1<<5) ? 0 : (1<<5)) |
+           (PINC&(1<<4) ? 0 : (1<<4)) |
+           (PINC&(1<<2) ? 0 : (1<<3)) |
+           (PINC&(1<<1) ? 0 : (1<<2)) |
+           (PINC&(1<<0) ? 0 : (1<<1)) |
+           (PINE&(1<<1) ? 0 : (1<<0));
 }
 
 /* Row pin configuration
@@ -194,19 +194,19 @@ static void select_row(uint8_t row)
 {
     // Output low(DDR:1, PORT:0) to select
     switch (row) {
-        case 8:
+        case 0:
             DDRE  |= (1<<0);
             PORTE &= ~(1<<0);
             break;
-        case 7:
+        case 1:
             DDRD  |= (1<<7);
             PORTD &= ~(1<<7);
             break;
-        case 6:
+        case 2:
             DDRD  |= (1<<5);
             PORTD &= ~(1<<5);
             break;
-        case 5:
+        case 3:
             DDRD  |= (1<<4);
             PORTD &= ~(1<<4);
             break;
@@ -214,19 +214,19 @@ static void select_row(uint8_t row)
             DDRD  |= (1<<3);
             PORTD &= ~(1<<3);
             break;
-        case 3:
+        case 5:
             DDRD  |= (1<<2);
             PORTD &= ~(1<<2);
             break;
-        case 2:
+        case 6:
             DDRD  |= (1<<1);
             PORTD &= ~(1<<1);
             break;
-        case 1:
+        case 7:
             DDRD  |= (1<<0);
             PORTD &= ~(1<<0);
             break;
-        case 0:
+        case 8:
             DDRB  |= (1<<7);
             PORTB &= ~(1<<7);
             break;
