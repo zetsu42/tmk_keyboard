@@ -24,19 +24,19 @@ void led_set(uint8_t usb_led)
 {
     DDRB |= (1<<0);
     DDRB |= (1<<1);
+    DDRC |= (1<<3);
     DDRC |= (1<<6);
-    DDRB |= (1<<3);
     if (usb_led & (1<<USB_LED_CAPS_LOCK)) {
         // output low
         PORTB &= ~(1<<0);
         PORTB &= ~(1<<1);
+        PORTC &= ~(1<<3);
         PORTC &= ~(1<<6);
-        PORTB &= ~(1<<3);
     } else {
         // Hi-Z
         PORTB |= (1<<0);
         PORTB |= (1<<1);
-        PORTC |= (1<<6);
         PORTC |= (1<<3);
+        PORTC |= (1<<6);
     }
 }
